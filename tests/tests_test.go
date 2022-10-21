@@ -11,3 +11,9 @@ func TestFuzzOneof(t *testing.T) {
 	profile := new(Profile)
 	fuzzer.Fuzz(profile)
 }
+
+func TestFuzzNil(t *testing.T) {
+	fuzzer := fuzz.NewWithSeed(0)
+	profile := (*Profile)(nil)
+	fuzzer.Fuzz(&profile)
+}

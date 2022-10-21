@@ -108,6 +108,9 @@ func msgFieldType(g *protogen.GeneratedFile, f *protogen.Field, self protogen.Go
 func generateFuzzMethod(g *protogen.GeneratedFile, m *protogen.Message, selfPath protogen.GoImportPath) {
 	g.P(`// Fuzz implements github.com/google/gofuzz.Interface for `, m.GoIdent)
 	g.P(`func (x *`, m.GoIdent, `) Fuzz(c_ `, fuzzPackage.Ident("Continue"), `) {`)
+	g.P(`if x == nil {`)
+	g.P(`return`)
+	g.P(`}`)
 	for _, f := range m.Fields {
 		if f.Desc.ContainingOneof() != nil {
 			continue
