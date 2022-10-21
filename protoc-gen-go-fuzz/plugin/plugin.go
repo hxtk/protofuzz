@@ -30,9 +30,9 @@ func genGeneratedHeader(gen *protogen.Plugin, g *protogen.GeneratedFile) {
 	g.P()
 }
 
-func varName(f *protogen.Field) string {
-	for i, v := range f.GoName {
-		return string(unicode.ToLower(v)) + f.GoName[i+1:]
+func varName(f string) string {
+	for i, v := range f {
+		return string(unicode.ToLower(v)) + f[i+1:]
 	}
 	return ""
 }
@@ -132,10 +132,22 @@ func generateFuzzMethod(g *protogen.GeneratedFile, m *protogen.Message, selfPath
 			typeIdent = "[]" + typeIdent
 		}
 
-		g.P(`var `, varName(f), ` `, typeIdent)
-		g.P(`c_.Fuzz(&`, varName(f), `)`)
-		g.P(`x.`, f.GoName, ` = `, varName(f))
+		g.P(`var `, varName(f.GoName), ` `, typeIdent)
+		g.P(`c_.Fuzz(&`, varName(f.GoName), `)`)
+		g.P(`x.`, f.GoName, ` = `, varName(f.GoName))
 		g.P()
+	}
+
+	for _, oo := range m.Oneofs {
+		g.P(`var `, varName(oo.GoName), ` is`, oo.GoIdent)
+		g.P(`switch c_.Intn(`, len(oo.Fields), `) {`)
+		for i, v := range oo.Fields {
+			g.P(`case `, i, `:`)
+			g.P(varName(oo.GoName), ` = new(`, v.GoIdent, `)`)
+			g.P(`c_.Fuzz(&`, varName(oo.GoName), `.(*`, v.GoIdent, `).`, v.GoName, `)`)
+		}
+		g.P(`}`)
+		g.P(`x.`, oo.GoName, ` = `, varName(oo.GoName))
 	}
 	g.P(`}`)
 	g.P()
