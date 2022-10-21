@@ -1,0 +1,24 @@
+{
+  "composites": {
+    "exclude_files": {
+      "external/org_golang_google_protobuf/internal/impl/message_reflect_field.go": "audited"
+    }
+  },
+  "copylocks": {
+    "exclude_files": {
+      "external/org_golang_google_protobuf/internal/.*": "cloning protobufs"
+    }
+  },
+  "shadow": {
+    "exclude_files": {
+      "external/.*": "enforce requirement only on first-party code",
+      "external/org_golang_google_protobuf/internal/encoding/messageset/messageset.go": "audited"
+    }
+  },
+  "unreachable": {
+    "exclude_files": {
+      "external/.*": "enforce requirement only on first-party code",
+      "external/org_golang_google_protobuf/encoding/prototext/decode.go": "audited"
+    }
+  }
+}

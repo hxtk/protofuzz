@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package hxtk.protofuzz.test;
+
+option go_package="github.com/hxtk/protofuzz/tests";
+
+import "google/protobuf/empty.proto";
+
+message SimpleMessage {
+	int32 a = 1;
+	sint32 b = 2;
+	uint32 c = 3;
+	int64 d = 4;
+	sint64 e = 5;
+	uint64 f = 6;
+	bool g = 7;
+	string h = 8;
+	bytes i = 9;
+	map<string, string> j = 10;
+}
+
+message SubMessage {
+	SimpleMessage sm = 1;
+}
+
+message MapMessage {
+	map<string, SimpleMessage> m = 1;
+}
+
+message ForeignMember {
+	google.protobuf.Empty e = 1;
+}
+
+message Profile {
+	oneof avatar {
+		string image_url = 1;
+		bytes image_data = 2;
+	}
+}
+	
