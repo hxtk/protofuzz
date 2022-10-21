@@ -1,4 +1,4 @@
-# gazelle:go_grpc_compilers @io_bazel_rules_go//proto:go_proto,//protoc-gen-go-fuzz:go_proto_fuzz
+# gazelle:exclude
 
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
