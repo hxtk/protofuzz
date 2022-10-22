@@ -17,6 +17,10 @@ message SimpleMessage {
 	string h = 8;
 	bytes i = 9;
 	map<string, string> j = 10;
+	sfixed32 k = 11;
+	fixed32 l = 12;
+	sfixed64 m = 13;
+	fixed64 n = 14;
 }
 
 message SubMessage {

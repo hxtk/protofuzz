@@ -38,17 +38,21 @@ func varName(f string) string {
 }
 
 var kindIdent = map[protoreflect.Kind]string{
-	protoreflect.BoolKind:   "bool",
-	protoreflect.Int32Kind:  "int32",
-	protoreflect.Sint32Kind: "int32",
-	protoreflect.Uint32Kind: "uint32",
-	protoreflect.Int64Kind:  "int64",
-	protoreflect.Sint64Kind: "int64",
-	protoreflect.Uint64Kind: "uint64",
-	protoreflect.FloatKind:  "float32",
-	protoreflect.DoubleKind: "float64",
-	protoreflect.StringKind: "string",
-	protoreflect.BytesKind:  "[]byte",
+	protoreflect.BoolKind:     "bool",
+	protoreflect.Int32Kind:    "int32",
+	protoreflect.Sint32Kind:   "int32",
+	protoreflect.Uint32Kind:   "uint32",
+	protoreflect.Int64Kind:    "int64",
+	protoreflect.Sint64Kind:   "int64",
+	protoreflect.Uint64Kind:   "uint64",
+	protoreflect.FloatKind:    "float32",
+	protoreflect.DoubleKind:   "float64",
+	protoreflect.StringKind:   "string",
+	protoreflect.BytesKind:    "[]byte",
+	protoreflect.Fixed32Kind:  "uint32",
+	protoreflect.Sfixed32Kind: "int32",
+	protoreflect.Fixed64Kind:  "uint64",
+	protoreflect.Sfixed64Kind: "int64",
 }
 
 func mapFieldType(g *protogen.GeneratedFile, m *protogen.Message, self protogen.GoImportPath) string {
