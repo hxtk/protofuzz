@@ -31,6 +31,27 @@ message ForeignMember {
 	google.protobuf.Empty e = 1;
 }
 
+enum Foo {
+	DEFAULT = 0;
+	A = 1;
+	B = 3;  // Skip a digit to prevent accidental correctness of naïve solution.
+	C = 6;
+	D = 7;
+}
+
+message PackageEnum {
+	Foo foo = 1;
+}
+
+message EmbeddedEnum {
+	enum Bar {
+		DEFAULT = 0;
+		A = 1;
+		B = 3;
+	}
+	Bar bar = 1;
+}
+
 message Profile {
 	oneof avatar {
 		string image_url = 1;

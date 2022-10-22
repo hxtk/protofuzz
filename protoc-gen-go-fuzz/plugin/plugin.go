@@ -121,7 +121,13 @@ func generateFuzzMethod(g *protogen.GeneratedFile, m *protogen.Message, selfPath
 		case protoreflect.MessageKind:
 			typeIdent = msgFieldType(g, f, selfPath)
 		case protoreflect.EnumKind:
-			fallthrough
+			g.P(`switch c_.Intn(`, len(f.Enum.Values), `) {`)
+			for i, v := range f.Enum.Values {
+				g.P(`case `, i, `:`)
+				g.P(`x.`, f.GoName, ` = `, v.GoIdent)
+			}
+			g.P(`}`)
+			continue
 		default:
 			x, ok := kindIdent[f.Desc.Kind()]
 			if !ok {
