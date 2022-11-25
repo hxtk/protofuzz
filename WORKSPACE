@@ -95,6 +95,7 @@ container_pull(
     name = "cc_base_image",
     registry = "gcr.io",
     repository = "distroless/cc-debian11",
+    digest = "sha256:6865ad48467c89c3c3524d4c426f52ad12d9ab7dec31fad31fae69da40eb6445",
     tag = "debug",
 )
 
@@ -116,6 +117,7 @@ rules_pkg_dependencies()
 
 http_file(
     name = "amd64_debian11_libc6",
+    sha256 = "768acd8ae472f3797ff21eb7aeb6ae4b59ae2fa8bb5a3a360bd3a69ebfe44df1",
     downloaded_file_path = "libc6_2.36-5_amd64.deb",
     urls = ["https://snapshot.debian.org/archive/debian/20221120T085602Z/pool/main/g/glibc/libc6_2.36-5_amd64.deb"],
 )
@@ -123,11 +125,13 @@ http_file(
 http_file(
     name = "amd64_debian11_libc-bin",
     downloaded_file_path = "libc-bin_2.31-13+deb11u5_amd64.deb",
+    sha256 = "b858bfc2bdb558a3fd3482e77c7e751acdd814210b30ff8387da26c5923bca86",
     urls = ["https://snapshot.debian.org/archive/debian/20221120T085602Z/pool/main/g/glibc/libc-bin_2.36-5_amd64.deb"],
 )
 
 http_file(
     name = "amd64_debian11_libstdcpp6",
+    sha256 = "7d70dcf69236f27d7ebb0bc0ebbd4afbb44db3c0815c29384f349881b05cd673",
     downloaded_file_path = "libstdc++6_12.2.0-9_amd64.deb",
     urls = ["https://snapshot.debian.org/archive/debian/20221120T085602Z/pool/main/g/gcc-12/libstdc%2B%2B6_12.2.0-9_amd64.deb"],
 )

@@ -41,6 +41,7 @@ container_image(
 container_push(
     name = "push_latest_docker_interface",
     image = ":docker_interface_image",
+    format = "Docker",
     registry = "docker.io",
     repository = "hxtk/protofuzz",
     tag = "latest",
