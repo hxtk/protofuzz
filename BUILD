@@ -27,11 +27,17 @@ gazelle(
 container_image(
     name = "docker_interface_image",
     base = "@cc_base_image//image",
+    cmd = ["protoc --proto_path /usr/include --proto_path /in/ --go-fuzz_out=/out/ $(find /in -name '*.proto')"],
     debs = [
         "@amd64_debian11_libc6//file",
         "@amd64_debian11_libc-bin//file",
         "@amd64_debian11_libstdcpp6//file",
     ],
+    entrypoint = [
+        "/busybox/sh",
+        "-c",
+    ],
+    symlinks = {"/bin/sh": "/busybox/sh"},
     tars = [
         ":protoc_gen_go_fuzz_tar",
         ":protoc_include_tar",
@@ -40,8 +46,8 @@ container_image(
 
 container_push(
     name = "push_latest_docker_interface",
-    image = ":docker_interface_image",
     format = "Docker",
+    image = ":docker_interface_image",
     registry = "docker.io",
     repository = "hxtk/protofuzz",
     tag = "latest",
